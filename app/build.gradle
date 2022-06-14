@@ -10,6 +10,7 @@ apply plugin: 'com.google.firebase.crashlytics'
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services' // Google services Gradle plugin
 
+
 def localPropertiesFile = rootProject.file("local.properties")
 def localProperties = new Properties()
 localProperties.load(new FileInputStream(localPropertiesFile))
@@ -26,9 +27,6 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-//        buildConfigField "String", "GOOGLE_KEY", localProperties['googleApi']
-//        buildConfigField "String", "WEATHER_KEY", localProperties['weatherApiKey']
-//        buildConfigField "String", "OPENCAGE_KEY", localProperties['openCageDataKey']
     }
 
     buildTypes {
