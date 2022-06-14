@@ -19,7 +19,6 @@ import org.junit.runners.JUnit4
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
-import retrofit2.Response.success
 
 @RunWith(JUnit4::class)
 class WeatherViewModelUnitTest {
@@ -31,9 +30,6 @@ class WeatherViewModelUnitTest {
 
      @Mock
      lateinit var dao: WeatherDao
-
-    @Mock
-    lateinit var fakeAllWeather : AllWeather
 
      @Before
      fun setup(){
