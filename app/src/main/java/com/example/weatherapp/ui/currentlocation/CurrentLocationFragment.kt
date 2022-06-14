@@ -6,11 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
+import com.example.weatherapp.*
 import com.example.weatherapp.DataBase.WeatherDatabase
-import com.example.weatherapp.R
-import com.example.weatherapp.RetroApiInterface
-import com.example.weatherapp.WeatherRepository
-import com.example.weatherapp.WeatherViewModel
 import com.example.weatherapp.databinding.FragmentCurrentLocationBinding
 import com.example.weatherapp.log.BaseFragment
 import com.example.weatherapp.log.DebugTree
@@ -38,12 +35,12 @@ class CurrentLocationFragment : BaseFragment() {
     lateinit var placesClient: PlacesClient
     lateinit var currentLocationViewModel: WeatherViewModel
 
-    val googleApi = "AIzaSyAiANxOSE30Kd-izZbZ4PnYIGo6ROppsMs" // Google Cloud API
+    val googleApi = BuildConfig.GOOGLE_API_KEY // Google Cloud API
 
-    val weatherApiKey = "dbaa4f9d6a3667a9dc5fd50d2100cc05"
+    val weatherApiKey = BuildConfig.OPENWEATHER_API_KEY
     //   val weatherApiKey = "d911015e54f48d2bf96b5dcaef433a6a"
     //    val weatherApiKey = "863e72223d279e955d713a9437a9e6ce"    // Open Weather API
-    val openCageDataKey = "8eb888cd6f6142ee9203998161b2eb7c"  // OpenCage Geocoding API
+    val openCageDataKey = BuildConfig.OPENCAGE_API_KEY  // OpenCage Geocoding API
     var units = "metric"  //imperial
 
     lateinit  var autocompleteFragment: AutocompleteSupportFragment
@@ -198,6 +195,34 @@ class CurrentLocationFragment : BaseFragment() {
                     binding.tempFive.text = it.hourly[5].temp.roundToInt().toString()
                     binding.timeFive.text = SimpleDateFormat("h:mm a").format(Date(it.hourly[5].dt.toLong()*1000))
 
+                    binding.hourlyIconSix.setImageDrawable(context?.getDrawable(setIcon(it.hourly[6].weather[0].icon)))
+                    binding.tempSix.text = it.hourly[6].temp.roundToInt().toString()
+                    binding.timeSix.text = SimpleDateFormat("h:mm a").format(Date(it.hourly[6].dt.toLong()*1000))
+
+
+                    binding.hourlyIconSeven.setImageDrawable(context?.getDrawable(setIcon(it.hourly[7].weather[0].icon)))
+                    binding.tempSeven.text = it.hourly[7].temp.roundToInt().toString()
+                    binding.timeSeven.text = SimpleDateFormat("h:mm a").format(Date(it.hourly[7].dt.toLong()*1000))
+
+                    binding.hourlyIconEight.setImageDrawable(context?.getDrawable(setIcon(it.hourly[8].weather[0].icon)))
+                    binding.tempEight.text = it.hourly[8].temp.roundToInt().toString()
+                    binding.timeSeven.text = SimpleDateFormat("h:mm a").format(Date(it.hourly[8].dt.toLong()*1000))
+
+                    binding.hourlyIconNine.setImageDrawable(context?.getDrawable(setIcon(it.hourly[9].weather[0].icon)))
+                    binding.tempNine.text = it.hourly[9].temp.roundToInt().toString()
+                    binding.timeNine.text = SimpleDateFormat("h:mm a").format(Date(it.hourly[9].dt.toLong()*1000))
+
+                    binding.hourlyIconTen.setImageDrawable(context?.getDrawable(setIcon(it.hourly[10].weather[0].icon)))
+                    binding.tempNine.text = it.hourly[10].temp.roundToInt().toString()
+                    binding.timeNine.text = SimpleDateFormat("h:mm a").format(Date(it.hourly[10].dt.toLong()*1000))
+
+                    binding.hourlyIconEleven.setImageDrawable(context?.getDrawable(setIcon(it.hourly[11].weather[0].icon)))
+                    binding.tempEleven.text = it.hourly[11].temp.roundToInt().toString()
+                    binding.timeEleven.text = SimpleDateFormat("h:mm a").format(Date(it.hourly[11].dt.toLong()*1000))
+
+                    binding.hourlyIconTwelve.setImageDrawable(context?.getDrawable(setIcon(it.hourly[12].weather[0].icon)))
+                    binding.tempTwelve.text = it.hourly[12].temp.roundToInt().toString()
+                    binding.timeTwelve.text = SimpleDateFormat("h:mm a").format(Date(it.hourly[12].dt.toLong()*1000))
                     //alerts
                     if (it.alerts != null){
                         binding.alertSection.visibility = View.VISIBLE

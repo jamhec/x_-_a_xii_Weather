@@ -35,10 +35,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         Timber.plant(DebugTree())
+        getSupportActionBar()?.hide();
 
         try {
-            //throw RuntimeException("Test")
-
             binding = ActivityMainBinding.inflate(layoutInflater)
             setContentView(binding.root)
             supportActionBar!!.title = "Weather App"
