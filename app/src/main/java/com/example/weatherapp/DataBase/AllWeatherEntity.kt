@@ -2,7 +2,7 @@ package com.example.weatherapp.DataBase
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-
+import kotlinx.android.parcel.Parcelize
 
 @Entity(tableName = "allWeather")
 data class AllWeatherEntity(

@@ -6,27 +6,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.annotation.RequiresApi
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherapp.APIResponse.Daily
-import com.example.weatherapp.DataBase.WeatherDatabase
-import com.example.weatherapp.R
-import com.example.weatherapp.RetroApiInterface
-import com.example.weatherapp.WeatherRepository
-import com.example.weatherapp.WeatherViewModel
 import com.example.weatherapp.databinding.FragmentWeeklyBinding
+import com.example.weatherapp.log.BaseFragment
+import com.example.weatherapp.log.DebugTree
+import timber.log.Timber
 import java.text.SimpleDateFormat
-import java.time.ZoneId
-import java.util.*
-import kotlin.collections.ArrayList
 
 
-class WeeklyFragment : Fragment() {
+class WeeklyFragment : BaseFragment() {
 
     private var _binding: FragmentWeeklyBinding? = null
 
@@ -44,6 +35,8 @@ class WeeklyFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
+        Timber.plant(DebugTree())
 
         _binding = FragmentWeeklyBinding.inflate(inflater, container, false)
         val root: View = binding.root

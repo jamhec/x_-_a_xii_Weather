@@ -28,13 +28,13 @@
         <entry key="..\:/Users/16263/StudioProjects/x_-_a_xii_Weather/app/src/main/res/drawable/rainy_gradient.xml" value="0.1" />
         <entry key="..\:/Users/16263/StudioProjects/x_-_a_xii_Weather/app/src/main/res/drawable/snow_bg.xml" value="0.1" />
         <entry key="..\:/Users/16263/StudioProjects/x_-_a_xii_Weather/app/src/main/res/drawable/sunny_gradient.xml" value="0.1" />
-        <entry key="..\:/Users/16263/StudioProjects/x_-_a_xii_Weather/app/src/main/res/layout/activity_locations_fragment.xml" value="0.18" />
+        <entry key="..\:/Users/16263/StudioProjects/x_-_a_xii_Weather/app/src/main/res/layout/activity_locations_fragment.xml" value="0.15" />
         <entry key="..\:/Users/16263/StudioProjects/x_-_a_xii_Weather/app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="..\:/Users/16263/StudioProjects/x_-_a_xii_Weather/app/src/main/res/layout/fragment_current_location.xml" value="0.22" />
+        <entry key="..\:/Users/16263/StudioProjects/x_-_a_xii_Weather/app/src/main/res/layout/fragment_current_location.xml" value="0.18" />
         <entry key="..\:/Users/16263/StudioProjects/x_-_a_xii_Weather/app/src/main/res/layout/fragment_map.xml" value="0.17617753623188406" />
         <entry key="..\:/Users/16263/StudioProjects/x_-_a_xii_Weather/app/src/main/res/layout/fragment_weekly.xml" value="0.17617753623188406" />
         <entry key="..\:/Users/16263/StudioProjects/x_-_a_xii_Weather/app/src/main/res/layout/limited_favorites_inflatable.xml" value="0.25" />
-        <entry key="..\:/Users/16263/StudioProjects/x_-_a_xii_Weather/app/src/main/res/layout/limited_weekly_inflatable.xml" value="0.17617753623188406" />
+        <entry key="..\:/Users/16263/StudioProjects/x_-_a_xii_Weather/app/src/main/res/layout/limited_weekly_inflatable.xml" value="0.25" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/clear_bg.xml" value="0.1235" />
         <entry key="app/src/main/res/drawable/clouds_bg.xml" value="0.1235" />

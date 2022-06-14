@@ -1,21 +1,19 @@
 package com.example.weatherapp.ui.currentlocation
 
-import android.app.ActionBar
-import android.opengl.Visibility
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
-import com.example.weatherapp.WeatherViewModel
 import com.example.weatherapp.DataBase.WeatherDatabase
 import com.example.weatherapp.R
 import com.example.weatherapp.RetroApiInterface
 import com.example.weatherapp.WeatherRepository
+import com.example.weatherapp.WeatherViewModel
 import com.example.weatherapp.databinding.FragmentCurrentLocationBinding
+import com.example.weatherapp.log.BaseFragment
+import com.example.weatherapp.log.DebugTree
 import com.google.android.gms.common.api.Status
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
@@ -27,11 +25,12 @@ import com.google.gson.GsonBuilder
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.kotlin.subscribeBy
 import io.reactivex.rxjava3.schedulers.Schedulers
+import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.roundToInt
 
-class CurrentLocationFragment : Fragment() {
+class CurrentLocationFragment : BaseFragment() {
 
     private var _binding: FragmentCurrentLocationBinding? = null
     private val binding get() = _binding!!
@@ -40,8 +39,10 @@ class CurrentLocationFragment : Fragment() {
     lateinit var currentLocationViewModel: WeatherViewModel
 
     val googleApi = "AIzaSyAiANxOSE30Kd-izZbZ4PnYIGo6ROppsMs" // Google Cloud API
-    val weatherApiKey = "d911015e54f48d2bf96b5dcaef433a6a"
-//    val weatherApiKey = "863e72223d279e955d713a9437a9e6ce"    // Open Weather API
+
+    val weatherApiKey = "dbaa4f9d6a3667a9dc5fd50d2100cc05"
+    //   val weatherApiKey = "d911015e54f48d2bf96b5dcaef433a6a"
+    //    val weatherApiKey = "863e72223d279e955d713a9437a9e6ce"    // Open Weather API
     val openCageDataKey = "8eb888cd6f6142ee9203998161b2eb7c"  // OpenCage Geocoding API
     var units = "metric"  //imperial
 
@@ -54,15 +55,21 @@ class CurrentLocationFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        val intr = RetroApiInterface.create()
-        val dao = WeatherDatabase.getInstance(this.requireContext())?.weatherDao()!!
-        val repo = WeatherRepository(intr, dao)
-        currentLocationViewModel = WeatherViewModel(repo)
+        Timber.plant(DebugTree())
 
+        try {
+
+            //throw RuntimeException("Test")
+            val intr = RetroApiInterface.create()
+            val dao = WeatherDatabase.getInstance(this.requireContext())?.weatherDao()!!
+            val repo = WeatherRepository(intr, dao)
+            currentLocationViewModel = WeatherViewModel(repo)
+
+        } catch(e : Exception) {
+            Timber.e(e)
+        }
         _binding = FragmentCurrentLocationBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
-
 
         autocompleteFragment = childFragmentManager.findFragmentById(R.id.autocomplete_fragment) as AutocompleteSupportFragment
 
@@ -112,7 +119,6 @@ class CurrentLocationFragment : Fragment() {
 
         //changes metric when view is clicked
         //binding.metric_change_button.setOnClickListener {} TODO : Please set an on-click listener to change the metric (Fahrenheit - Celcius)
-
 
         return root
     }
@@ -171,7 +177,7 @@ class CurrentLocationFragment : Fragment() {
                     binding.currentFeelsLike.text = it.current.feelsLike.roundToInt().toString() + "°" //detail
 
 
-                    //5 hourly update textview
+                    //12 hourly update textview
                     binding.hourlyIconOne.setImageDrawable(context?.getDrawable(setIcon(it.hourly[1].weather[0].icon)))
                     binding.tempOne.text = it.hourly[1].temp.roundToInt().toString()
                     binding.timeOne.text = SimpleDateFormat("h:mm a").format(Date(it.hourly[1].dt.toLong()*1000))

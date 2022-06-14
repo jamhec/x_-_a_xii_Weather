@@ -11,39 +11,30 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.setFragmentResultListener
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.weatherapp.APIResponse.AllWeather
 import com.example.weatherapp.APIResponse.LocationWeather
 import com.example.weatherapp.DataBase.FavLocations
-import com.example.weatherapp.DataBase.PlaceName
 import com.example.weatherapp.DataBase.WeatherDatabase
-import com.example.weatherapp.R
 import com.example.weatherapp.RetroApiInterface
 import com.example.weatherapp.WeatherRepository
-import com.example.weatherapp.WeatherViewModel
 import com.example.weatherapp.databinding.ActivityLocationsFragmentBinding
-import com.google.android.gms.common.api.Status
+import com.example.weatherapp.log.BaseFragment
+import com.example.weatherapp.log.DebugTree
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.model.TypeFilter
 import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.libraries.places.widget.Autocomplete
 import com.google.android.libraries.places.widget.AutocompleteActivity
-import com.google.android.libraries.places.widget.AutocompleteSupportFragment
-import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.kotlin.subscribeBy
 import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.android.synthetic.main.limited_favorites_inflatable.view.*
-import java.lang.Exception
+import timber.log.Timber
 
 
-class LocationsFragment : Fragment() {
+class LocationsFragment : BaseFragment() {
 
     private var _binding: ActivityLocationsFragmentBinding? = null
     private val binding get() = _binding!!
@@ -60,6 +51,8 @@ class LocationsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
+        Timber.plant(DebugTree())
 
         val intr = RetroApiInterface.create()
         val dao = WeatherDatabase.getInstance(this.requireContext())?.weatherDao()!!
