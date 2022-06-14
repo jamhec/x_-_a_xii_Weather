@@ -1,6 +1,7 @@
 package com.example.weatherapp
 
 import com.example.weatherapp.APIResponse.*
+import com.example.weatherapp.DataBase.FavLocations
 import com.example.weatherapp.GeolocationApi.Location
 import com.example.weatherapp.ui.locations.LocationAdapter
 import com.example.weatherapp.ui.weekly.WeeklyAdapter
@@ -21,7 +22,8 @@ class LocationAdapterUnitTest {
     fun setup(){
         MockitoAnnotations.openMocks(this)
         fakeLocationList = listOf(
-            LocationWeather(AllWeather((Current(1,2.2,2,2.2,
+            LocationWeather(AllWeather(listOf(Alert("Fire in Woods", 2,"Fire",
+                "Jessica",1,listOf("fire","danger"))),(Current(1,2.2,2,2.2,
                 2,2,2,2,2.2,2.2,2,
                 listOf(Weather("Cloudy", "04d", 1, "cloudy")), 2,
                 2.2)),
@@ -33,7 +35,9 @@ class LocationAdapterUnitTest {
                     Rain(2.2),2.2,2.2,2,
                     listOf(Weather("Cloudy", "04d", 1, "cloudy")),2,
                     2.2,2.2)),2.2,2.2,
-                listOf(Minutely(2,2.2)),"PST",12345), "LA"))
+                listOf(Minutely(2,2.2)),"PST",12345),
+                FavLocations(null,"LA", "70", "70")
+            ))
         adapter = LocationAdapter(fakeLocationList)
     }
 

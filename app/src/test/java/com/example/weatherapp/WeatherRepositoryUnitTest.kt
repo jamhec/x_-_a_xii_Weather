@@ -17,6 +17,8 @@ import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 import retrofit2.Response.success
 import com.example.weatherapp.DataBase.*
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.kotlin.subscribeBy
 import junit.framework.TestCase
 
 @RunWith(JUnit4::class)
@@ -53,11 +55,16 @@ class WeatherRepositoryUnitTest : TestCase() {
     fun getCurrentWeatherTest(){
         runBlocking {
             Mockito.`when`(inter.getCurrentWeather("0","0","0","0"))
-                .thenReturn(success(fakeAllWeather))
+                .thenReturn(Observable.just(fakeAllWeather))
 
-            var response = repo.getCurrentWeather("0","0","0","0")
+            var result = repo.getCurrentWeather("0","0","0","0")
 
-            assertEquals(fakeAllWeather,response.body())
+            result.subscribeBy(
+                onNext = {
+                    assertEquals(fakeAllWeather, it)
+                },
+                onError = { println("Error: $it")}
+            )
         }
     }
 
@@ -67,11 +74,16 @@ class WeatherRepositoryUnitTest : TestCase() {
             var fakeGeolocation: Geolocation = Geolocation(Location(70.0, 70.0))
             var fakeApi = "0"
             Mockito.`when`(inter.getGeoloaction(fakeApi))
-                .thenReturn(success(fakeGeolocation))
+                .thenReturn(Observable.just(fakeGeolocation))
 
-            var response = repo.getGeoloaction(fakeApi)
+            var result = repo.getGeoloaction(fakeApi)
 
-            assertEquals(fakeGeolocation,response.body())
+            result.subscribeBy(
+                onNext = {
+                    assertEquals(fakeGeolocation, it)
+                },
+                onError = { println("Error: $it")}
+            )
         }
     }
 
@@ -84,11 +96,16 @@ class WeatherRepositoryUnitTest : TestCase() {
             var fakeApi = "0"
 
             Mockito.`when`(inter.getCurrentCity(fakeLatLng,fakeApi))
-                .thenReturn(success(fakeCurrentCity))
+                .thenReturn(Observable.just(fakeCurrentCity))
 
-            var response = repo.getCurrentCity(fakeLatLng,fakeApi)
+            var result = repo.getCurrentCity(fakeLatLng,fakeApi)
 
-            assertEquals(fakeCurrentCity,response.body())
+            result.subscribeBy(
+                onNext = {
+                    assertEquals(fakeCurrentCity, it)
+                },
+                onError = { println("Error: $it")}
+            )
         }
     }
 

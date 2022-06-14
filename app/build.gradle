@@ -10,6 +10,10 @@ apply plugin: 'com.google.firebase.crashlytics'
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services' // Google services Gradle plugin
 
+def localPropertiesFile = rootProject.file("local.properties")
+def localProperties = new Properties()
+localProperties.load(new FileInputStream(localPropertiesFile))
+
 android {
     compileSdk 32
 
@@ -21,6 +25,10 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+//        buildConfigField "String", "GOOGLE_KEY", localProperties['googleApi']
+//        buildConfigField "String", "WEATHER_KEY", localProperties['weatherApiKey']
+//        buildConfigField "String", "OPENCAGE_KEY", localProperties['openCageDataKey']
     }
 
     buildTypes {
@@ -66,6 +74,7 @@ dependencies {
     testImplementation "com.squareup.retrofit2:retrofit-mock:2.5.0"
     testImplementation "org.mockito:mockito-inline:2.8.47"
     testImplementation "org.mockito.kotlin:mockito-kotlin:4.0.0"
+    testImplementation("io.strikt:strikt-core:0.34.0")
 
     implementation 'com.google.android.gms:play-services-location:19.0.1'
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
