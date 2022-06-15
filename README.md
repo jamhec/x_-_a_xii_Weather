@@ -6,4 +6,4 @@ convenient way to see the weather conditions anywhere in the world. There is hou
 your favorite locations in a list. Everything is at the touch of a button using bottom navigation and you can easily switch from metric 
 to imperial degree units using a button in the action bar of the app.
 
-Includes:Clean Architecture, Design Pattern(MVVM), Unit Testing(Mockito), Exception Handling, Logging(Timber), and Monitoring(Crashlytics)
+Includes: Clean Architecture, Design Pattern(MVVM), Unit Testing(Mockito), Exception Handling, Logging(Timber), and Monitoring(Crashlytics)
