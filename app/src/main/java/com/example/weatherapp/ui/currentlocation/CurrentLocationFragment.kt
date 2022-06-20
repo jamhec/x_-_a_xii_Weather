@@ -10,11 +10,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
-import com.example.weatherapp.WeatherViewModel
+import com.example.weatherapp.*
 import com.example.weatherapp.DataBase.WeatherDatabase
-import com.example.weatherapp.R
-import com.example.weatherapp.RetroApiInterface
-import com.example.weatherapp.WeatherRepository
 import com.example.weatherapp.databinding.FragmentCurrentLocationBinding
 import com.google.android.gms.common.api.Status
 import com.google.android.libraries.places.api.Places
@@ -39,10 +36,10 @@ class CurrentLocationFragment : Fragment() {
     lateinit var placesClient: PlacesClient
     lateinit var currentLocationViewModel: WeatherViewModel
 
-    val googleApi = "AIzaSyAiANxOSE30Kd-izZbZ4PnYIGo6ROppsMs" // Google Cloud API
-    val weatherApiKey = "d911015e54f48d2bf96b5dcaef433a6a"
+    val googleApi = BuildConfig.GOOGLE_API_KEY // Google Cloud API
+    val weatherApiKey = BuildConfig.OPENWEATHER_API_KEY
 //    val weatherApiKey = "863e72223d279e955d713a9437a9e6ce"    // Open Weather API
-    val openCageDataKey = "8eb888cd6f6142ee9203998161b2eb7c"  // OpenCage Geocoding API
+    val openCageDataKey = BuildConfig.OPENCAGE_API_KEY  // OpenCage Geocoding API
     var units = "metric"  //imperial
 
     lateinit  var autocompleteFragment: AutocompleteSupportFragment
