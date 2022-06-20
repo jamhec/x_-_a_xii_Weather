@@ -40,7 +40,7 @@ class CurrentLocationFragment : Fragment() {
     val weatherApiKey = BuildConfig.OPENWEATHER_API_KEY
 //    val weatherApiKey = "863e72223d279e955d713a9437a9e6ce"    // Open Weather API
     val openCageDataKey = BuildConfig.OPENCAGE_API_KEY  // OpenCage Geocoding API
-    var units = "metric"  //imperial
+    var units = "imperial" //"metric"  //imperial
 
     lateinit  var autocompleteFragment: AutocompleteSupportFragment
 
@@ -153,7 +153,7 @@ class CurrentLocationFragment : Fragment() {
                     binding.currentDate.text = SimpleDateFormat("MMM dd").format(it.current.dt.toLong()*1000).toString()
                     binding.currentTime.text = SimpleDateFormat("h:mm a").format(it.current.dt.toLong()*1000).toString()
 
-                    binding.currentTemperature.text = it.current.temp.roundToInt().toString() + "°"
+                    binding.currentTemperature.text = it.current.temp.roundToInt().toString() //+ "°"
                     binding.currentConditions.text = it.current.weather[0].main//.capitalize()
                     binding.currentIcon.setImageDrawable(context?.getDrawable(setIcon(it.current.weather[0].icon)))
 
