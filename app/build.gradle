@@ -19,6 +19,10 @@ android {
     compileSdk 32
 
     defaultConfig {
+        buildConfigField "String", "OPENWEATHER_API_KEY", localProperties['OPENWEATHER_API_KEY']
+        buildConfigField "String", "GOOGLE_API_KEY", localProperties['GOOGLE_API_KEY']
+        buildConfigField "String", "OPENCAGE_API_KEY", localProperties['OPENCAGE_API_KEY']
+
         applicationId "com.example.weatherapp"
         minSdk 24
         targetSdk 32

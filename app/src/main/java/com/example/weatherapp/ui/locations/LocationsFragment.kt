@@ -16,15 +16,12 @@ import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.weatherapp.*
 import com.example.weatherapp.APIResponse.AllWeather
 import com.example.weatherapp.APIResponse.LocationWeather
 import com.example.weatherapp.DataBase.FavLocations
 import com.example.weatherapp.DataBase.PlaceName
 import com.example.weatherapp.DataBase.WeatherDatabase
-import com.example.weatherapp.R
-import com.example.weatherapp.RetroApiInterface
-import com.example.weatherapp.WeatherRepository
-import com.example.weatherapp.WeatherViewModel
 import com.example.weatherapp.databinding.ActivityLocationsFragmentBinding
 import com.google.android.gms.common.api.Status
 import com.google.android.libraries.places.api.Places
@@ -65,9 +62,9 @@ class LocationsFragment : Fragment() {
         val dao = WeatherDatabase.getInstance(this.requireContext())?.weatherDao()!!
         val repo = WeatherRepository(intr, dao)
         locationViewModel = LocationViewModel(repo)
-        val googleApi = "AIzaSyAiANxOSE30Kd-izZbZ4PnYIGo6ROppsMs"
+        val googleApi = BuildConfig.GOOGLE_API_KEY
 //        val weatherApiKey = "863e72223d279e955d713a9437a9e6ce"
-        val weatherApiKey = "d911015e54f48d2bf96b5dcaef433a6a"
+        val weatherApiKey = BuildConfig.OPENWEATHER_API_KEY
         var unit = "metric"
 
 
@@ -78,14 +75,14 @@ class LocationsFragment : Fragment() {
 
 
         binding.addButton.setOnClickListener {
-            Places.initialize(context!!, googleApi)
-            placesClient = Places.createClient(context!!)
+            Places.initialize(requireContext()!!, googleApi)
+            placesClient = Places.createClient(requireContext()!!)
             val AUTOCOMPLETE_REQUEST_CODE = 1
 
             val fields = listOf(Place.Field.LAT_LNG, Place.Field.ADDRESS)
             val intent = Autocomplete.IntentBuilder(AutocompleteActivityMode.OVERLAY, fields)
                 .setTypeFilter(TypeFilter.CITIES)
-                .build(this.context!!)
+                .build(requireContext()!!)
             startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE)
         }
 //        <---End of Codes for Google autocomplete Fragment --->
@@ -135,8 +132,13 @@ class LocationsFragment : Fragment() {
                     }
                     .setPositiveButton("Yes") { _, _ ->
                         locationViewModel.deleteFavLocation(deleteLocation)
+                        if(locWeatherList.size == 1){
+                            locWeatherList.clear()
+                            adapter.notifyDataSetChanged()
+                        }
                         Toast.makeText(context, "$locName is deleted", Toast.LENGTH_LONG).show()
                     }.show()
+
             }
         })
 
